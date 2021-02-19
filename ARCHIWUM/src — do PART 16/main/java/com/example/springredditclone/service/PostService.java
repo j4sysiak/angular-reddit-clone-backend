@@ -33,19 +33,15 @@ public class PostService {
     private final PostMapper postMapper;
     private final UserRepository userRepository;
 
-//    public void save(PostRequest postRequest) {
-//        Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName())
-//                .orElseThrow(() -> new SubredditNotFoundException(postRequest.getSubredditName()));
-//        postRepository.save(postMapper.map(postRequest, subreddit, authService.getCurrentUser()));
-//    }
-
     public Post save(PostRequest postRequest) {
-        Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName()).orElseThrow(() -> new SubredditNotFoundException(postRequest.getSubredditName()));
+        Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName())
+                .orElseThrow(() -> new SubredditNotFoundException(postRequest.getSubredditName()));
 
-        User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
+        User currentUser = authService.getCurrentUser();
+
 //        return postMapper.map(postRequest, subreddit, currentUser);
 
-        return postRepository.save(postMapper.map(postRequest, subreddit, tmpUser /*authService.getCurrentUser()*/  ));
+        return postRepository.save(postMapper.map(postRequest, subreddit, authService.getCurrentUser()));
     }
 
     @Transactional(readOnly = true)

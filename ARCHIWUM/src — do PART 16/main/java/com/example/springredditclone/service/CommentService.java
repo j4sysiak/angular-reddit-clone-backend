@@ -34,12 +34,10 @@ public class CommentService {
         Post post = postRepository.findById(commentsDto.getPostId())
                 .orElseThrow(() -> new PostNotFoundException(commentsDto.getPostId().toString()));
 
-        User tmpUser = new User(1L,"user9", "user9", "user9@wp.pl");
-
-        Comment comment = commentMapper.map(commentsDto, post, tmpUser /*authService.getCurrentUser()*/);
+        Comment comment = commentMapper.map(commentsDto, post, authService.getCurrentUser());
         commentRepository.save(comment);
 
-        String message = mailContentBuilder.build(tmpUser /*authService.getCurrentUser()*/ + " posted a comment on your post." + POST_URL);
+        String message = mailContentBuilder.build(authService.getCurrentUser() + " posted a comment on your post." + POST_URL);
         sendCommentNotification(message, post.getUser());
     }
 

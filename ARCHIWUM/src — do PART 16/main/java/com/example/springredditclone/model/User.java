@@ -36,11 +36,4 @@ public class User {
     private Instant created;
 
     private boolean enabled;
-
-    public User(Long userId, @NotBlank(message = "Username is required") String username, @NotBlank(message = "Password is required") String password, @Email @NotEmpty(message = "Email is required") String email) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
 }
