@@ -16,6 +16,7 @@ import java.util.Optional;
 import static com.example.springredditclone.model.VoteType.DOWNVOTE;
 import static com.example.springredditclone.model.VoteType.UPVOTE;
 
+
 @Mapper(componentModel = "spring")
 public abstract class PostMapper {
 
@@ -25,6 +26,7 @@ public abstract class PostMapper {
     private VoteRepository voteRepository;
     @Autowired
     private AuthService authService;
+
 
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
     @Mapping(target = "description", source = "postRequest.description")
