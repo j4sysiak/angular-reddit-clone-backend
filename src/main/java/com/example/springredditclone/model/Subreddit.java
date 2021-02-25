@@ -29,6 +29,8 @@ public class Subreddit {
     @NotBlank(message = "Description is required")
     private String description;
 
+    private String testowePole;
+
     private Instant createdDate;
 
     @OneToMany(fetch = LAZY)
