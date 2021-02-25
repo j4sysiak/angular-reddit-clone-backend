@@ -4,39 +4,34 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.Instant;
-import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Builder
-public class Subreddit {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Document {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    private Long documentId;
 
-    @NotBlank(message = "Community name is required")
-    private String name;
+    @NotBlank(message = "Document Name cannot be empty or Null")
+    private String documentName;
 
-    @NotBlank(message = "Description is required")
+    @Nullable
+    @Lob
     private String description;
 
-    private Instant createdDate;
-
-    @OneToMany(fetch = LAZY)
-    private List<Post> posts;
-
-    @OneToMany(fetch = LAZY)
-    private List<Document> documents;
-
     @ManyToOne(fetch = LAZY)
-    private User user;
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private Subreddit subreddit;
 }
