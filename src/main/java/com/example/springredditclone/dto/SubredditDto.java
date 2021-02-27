@@ -1,9 +1,12 @@
 package com.example.springredditclone.dto;
 
+import com.example.springredditclone.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
@@ -15,4 +18,6 @@ public class SubredditDto {
     private String description;
     private Integer numberOfPosts;
     private String testowePole;
+    private Instant createdDate;
+    private Long user_id;
 }

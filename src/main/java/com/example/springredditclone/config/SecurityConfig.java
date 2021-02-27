@@ -74,63 +74,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 UsernamePasswordAuthenticationFilter.class);
     }
 
-
-//    @Override
-//    public void configure(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.cors().and()
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/api/auth/**")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/subreddit")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/subreddit")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/posts/")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/posts/")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/posts/by-user")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/posts/by-user")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/posts/by-user/**")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/posts/by-user/**")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/posts/**")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/posts/**")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/comments/")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/comments/")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/comments/**")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/comments/")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/comments/by-user")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/comments/by-user")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/comments/by-post")
-//                .permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/comments/by-post")
-//                .permitAll()
-//                .antMatchers("/v2/api-docs",
-//                        "/configuration/ui",
-//                        "/swagger-resources/**",
-//                        "/configuration/security",
-//                        "/swagger-ui.html",
-//                        "/webjars/**")
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated();
-//        httpSecurity.addFilterBefore(jwtAuthenticationFilter,
-//                UsernamePasswordAuthenticationFilter.class);
-//    }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService)

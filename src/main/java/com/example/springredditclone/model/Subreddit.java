@@ -39,6 +39,10 @@ public class Subreddit {
     @OneToMany(fetch = LAZY)
     private List<Document> documents;
 
+//    @ManyToOne(fetch = LAZY)
+//    private User user;
+
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 }
