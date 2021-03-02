@@ -1,17 +1,17 @@
 package com.example.springredditclone.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostRequest {
-    private Long postId;
-    private String postName;
-    private String url;
-    private String description;
-
-    private String subredditName;
+@Builder
+public class ProductDto {
+    private Long id;
+    private String name;
 }

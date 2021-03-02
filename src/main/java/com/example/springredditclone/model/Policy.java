@@ -18,30 +18,20 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Policy {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long postId;
+    private Long policyId;
 
-    @NotBlank(message = "Post Name cannot be empty or Null")
-    private String postName;
+    @NotBlank(message = "Policy Name cannot be empty or Null")
+    private String policyName;
 
-    @Nullable
-    private String url;
+    @NotBlank(message = "Policy Description cannot be empty or Null")
+    private String policyDescription;
 
-    @Nullable
-    @Lob
-    private String description;
-
-    private Integer voteCount = 0;
-
-    private Instant createdDate;
+    private Instant policyCreatedDate;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private User user;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "subredditId", referencedColumnName = "id")
-    private Subreddit subreddit;
+    @JoinColumn(name = "productId", referencedColumnName = "id")
+    private Product product;
 }
