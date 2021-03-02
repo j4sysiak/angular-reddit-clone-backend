@@ -10,7 +10,6 @@ public interface ProductMapper {
 
     ProductDto mapProductToDto(Product product);
 
-
     @InheritInverseConfiguration
     Product mapDtoToProduct(ProductDto productDto);
 }

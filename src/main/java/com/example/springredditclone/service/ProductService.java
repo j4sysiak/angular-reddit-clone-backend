@@ -2,8 +2,10 @@ package com.example.springredditclone.service;
 
 import com.example.springredditclone.dto.ProductDto;
 import com.example.springredditclone.dto.SubredditDto;
+import com.example.springredditclone.exceptions.SpringRedditException;
 import com.example.springredditclone.mapper.ProductMapper;
 import com.example.springredditclone.model.Product;
+import com.example.springredditclone.model.Subreddit;
 import com.example.springredditclone.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,5 +41,11 @@ public class ProductService {
                 .stream()
                 .map(productMapper::mapProductToDto)
                 .collect(toList());
+    }
+
+    public ProductDto getProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new SpringRedditException("No product found with ID - " + id));
+        return productMapper.mapProductToDto(product);
     }
 }

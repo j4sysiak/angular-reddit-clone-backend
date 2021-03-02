@@ -1,6 +1,7 @@
 package com.example.springredditclone.controller;
 
 import com.example.springredditclone.dto.ProductDto;
+import com.example.springredditclone.dto.SubredditDto;
 import com.example.springredditclone.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,10 +32,10 @@ public class ProductController {
                 .body(productService.getAll());
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<SubredditDto> getSubreddit(@PathVariable Long id) {
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(subredditService.getSubreddit(id));
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getProduct(@PathVariable Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productService.getProduct(id));
+    }
 }
