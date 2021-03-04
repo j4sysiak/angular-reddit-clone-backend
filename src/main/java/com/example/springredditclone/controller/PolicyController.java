@@ -1,14 +1,17 @@
 package com.example.springredditclone.controller;
 
 import com.example.springredditclone.dto.PolicyRequest;
+import com.example.springredditclone.dto.ProductDto;
 import com.example.springredditclone.service.PolicyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/policies/")
+@RequestMapping("/api/policy")
 @AllArgsConstructor
 public class PolicyController {
 
@@ -18,6 +21,20 @@ public class PolicyController {
     public ResponseEntity<Void> createPolicy(@RequestBody PolicyRequest policyRequest) {
         policyService.save(policyRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PolicyRequest>> getAllPolicies() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(policyService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PolicyRequest> getProduct(@PathVariable Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(policyService.getPolicy(id));
     }
 
 //    @GetMapping

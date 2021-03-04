@@ -1,11 +1,9 @@
 package com.example.springredditclone.service;
 
 import com.example.springredditclone.dto.ProductDto;
-import com.example.springredditclone.dto.SubredditDto;
 import com.example.springredditclone.exceptions.SpringRedditException;
 import com.example.springredditclone.mapper.ProductMapper;
 import com.example.springredditclone.model.Product;
-import com.example.springredditclone.model.Subreddit;
 import com.example.springredditclone.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

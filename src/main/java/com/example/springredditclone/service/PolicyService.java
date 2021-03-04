@@ -1,16 +1,24 @@
 package com.example.springredditclone.service;
 
 import com.example.springredditclone.dto.PolicyRequest;
+import com.example.springredditclone.dto.PostResponse;
+import com.example.springredditclone.exceptions.PostNotFoundException;
 import com.example.springredditclone.exceptions.ProductNotFoundException;
-import com.example.springredditclone.exceptions.SubredditNotFoundException;
 import com.example.springredditclone.mapper.PolicyMapper;
-import com.example.springredditclone.mapper.PostMapper;
-import com.example.springredditclone.model.*;
-import com.example.springredditclone.repository.*;
+import com.example.springredditclone.model.Policy;
+import com.example.springredditclone.model.Post;
+import com.example.springredditclone.model.Product;
+import com.example.springredditclone.model.User;
+import com.example.springredditclone.repository.PolicyRepository;
+import com.example.springredditclone.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -18,8 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PolicyService {
 
-    private final ProductRepository productRepository;
     private final PolicyRepository policyRepository;
+    private final ProductRepository productRepository;
     private final PolicyMapper policyMapper;
 
     public Policy save(PolicyRequest policyRequest) {
@@ -32,4 +40,22 @@ public class PolicyService {
 
         return policyRepository.save(policyMapper.map(policyRequest, product));
     }
+
+    @Transactional(readOnly = true)
+    public List<PolicyRequest> getAll() {
+        return policyRepository.findAll()
+                .stream()
+                .map(policyMapper::mapPolicyToDto)
+                .collect(toList());
+    }
+
+
+    @Transactional(readOnly = true)
+    public PolicyRequest getPolicy(Long id) {
+        Policy policy = policyRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException(id.toString()));
+        return policyMapper.mapPolicyToDto(policy);
+
+    }
+
 }
