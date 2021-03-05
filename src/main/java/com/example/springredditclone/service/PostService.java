@@ -46,21 +46,21 @@ public class PostService {
           User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
           //User tmpUser = authService.getCurrentUser();
 
-        return postRepository.save(postMapper.map(postRequest, subreddit, tmpUser /*authService.getCurrentUser()*/));
+        return postRepository.save(postMapper.mapDtoToPost(postRequest, subreddit, tmpUser /*authService.getCurrentUser()*/));
     }
 
     @Transactional(readOnly = true)
     public PostResponse getPost(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id.toString()));
-        return postMapper.mapToDto(post);
+        return postMapper.mapPostToDto(post);
     }
 
     @Transactional(readOnly = true)
     public List<PostResponse> getAllPosts() {
         return postRepository.findAll()
                 .stream()
-                .map(postMapper::mapToDto)
+                .map(postMapper::mapPostToDto)
                 .collect(toList());
     }
 
@@ -69,7 +69,7 @@ public class PostService {
         Subreddit subreddit = subredditRepository.findById(subredditId)
                 .orElseThrow(() -> new SubredditNotFoundException(subredditId.toString()));
         List<Post> posts = postRepository.findAllBySubreddit(subreddit);
-        return posts.stream().map(postMapper::mapToDto).collect(toList());
+        return posts.stream().map(postMapper::mapPostToDto).collect(toList());
     }
 
     @Transactional(readOnly = true)
@@ -78,7 +78,7 @@ public class PostService {
                 .orElseThrow(() -> new UsernameNotFoundException(username));
         return postRepository.findByUser(user)
                 .stream()
-                .map(postMapper::mapToDto)
+                .map(postMapper::mapPostToDto)
                 .collect(toList());
     }
 }

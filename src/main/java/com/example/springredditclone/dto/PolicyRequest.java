@@ -10,10 +10,10 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PolicyRequest {
-    private Long policyId;
+    private Long   policyId;
     private String policyName;
     private String policyDescription;
-    //private Instant policyCreatedDate;
+    private String policyCreatedDate;
 
     private String productName;
 }

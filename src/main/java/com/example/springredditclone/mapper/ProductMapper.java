@@ -8,8 +8,11 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductDto mapProductToDto(Product product);
-
+    /*do tworzenia*/
     @InheritInverseConfiguration
     Product mapDtoToProduct(ProductDto productDto);
+
+    /*do odczytu*/
+    ProductDto mapProductToDto(Product product);
+
 }

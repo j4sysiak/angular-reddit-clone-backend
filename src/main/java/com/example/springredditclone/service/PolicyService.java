@@ -38,7 +38,15 @@ public class PolicyService {
         User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
         //User tmpUser = authService.getCurrentUser();
 
-        return policyRepository.save(policyMapper.map(policyRequest, product));
+        return policyRepository.save(policyMapper.mapDtoToPolicy(policyRequest, product));
+    }
+
+    @Transactional(readOnly = true)
+    public PolicyRequest getPolicy(Long id) {
+        Policy policy = policyRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException(id.toString()));
+        return policyMapper.mapPolicyToDto(policy);
+
     }
 
     @Transactional(readOnly = true)
@@ -50,12 +58,6 @@ public class PolicyService {
     }
 
 
-    @Transactional(readOnly = true)
-    public PolicyRequest getPolicy(Long id) {
-        Policy policy = policyRepository.findById(id)
-                .orElseThrow(() -> new PostNotFoundException(id.toString()));
-        return policyMapper.mapPolicyToDto(policy);
 
-    }
 
 }

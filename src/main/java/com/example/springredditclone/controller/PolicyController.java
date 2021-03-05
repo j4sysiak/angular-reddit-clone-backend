@@ -1,7 +1,6 @@
 package com.example.springredditclone.controller;
 
 import com.example.springredditclone.dto.PolicyRequest;
-import com.example.springredditclone.dto.ProductDto;
 import com.example.springredditclone.service.PolicyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +30,7 @@ public class PolicyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PolicyRequest> getProduct(@PathVariable Long id) {
+    public ResponseEntity<PolicyRequest> getPolicy(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(policyService.getPolicy(id));
