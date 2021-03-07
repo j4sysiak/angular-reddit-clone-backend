@@ -64,4 +64,10 @@ public class PolicyService {
         List<Policy> policies = policyRepository.findAllByProduct(product);
         return policies.stream().map(policyMapper::mapPolicyToDto).collect(toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<PolicyResponse> getAllPoliciesByNameContaining(String name) {
+        List<Policy> policies = policyRepository.findByPolicyNameContaining(name);
+        return policies.stream().map(policyMapper::mapPolicyToDto).collect(toList());
+    }
 }

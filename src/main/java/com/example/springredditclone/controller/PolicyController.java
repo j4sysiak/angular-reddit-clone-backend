@@ -43,4 +43,9 @@ public class PolicyController {
     public ResponseEntity<List<PolicyResponse>> getAllPoliciesByProductId(@PathVariable Long id) {
         return status(HttpStatus.OK).body(policyService.getAllPoliciesByProductId(id));
     }
+
+    @GetMapping("/by-name-containing/{name}")
+    public ResponseEntity<List<PolicyResponse>> getAllPoliciesByNameContaining(@PathVariable String name) {
+        return status(HttpStatus.OK).body(policyService.getAllPoliciesByNameContaining(name));
+    }
 }
