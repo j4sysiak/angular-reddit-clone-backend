@@ -1,6 +1,7 @@
 package com.example.springredditclone.controller;
 
 import com.example.springredditclone.dto.PolicyRequest;
+import com.example.springredditclone.dto.PolicyResponse;
 import com.example.springredditclone.service.PolicyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("/api/policy")
@@ -23,37 +26,21 @@ public class PolicyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PolicyRequest>> getAllPolicies() {
+    public ResponseEntity<List<PolicyResponse>> getAllPolicies() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(policyService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PolicyRequest> getPolicy(@PathVariable Long id) {
+    public ResponseEntity<PolicyResponse> getPolicy(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(policyService.getPolicy(id));
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<PostResponse>> getAllPosts() {
-//        return status(HttpStatus.OK).body(postService.getAllPosts());
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<PostResponse> getPost(@PathVariable Long id) {
-//        return status(HttpStatus.OK).body(postService.getPost(id));
-//    }
-//
-//    @GetMapping("/by-subreddit/{id}")
-//    public ResponseEntity<List<PostResponse>> getPostsBySubreddit(@PathVariable Long id) {
-//        return status(HttpStatus.OK).body(postService.getPostsBySubreddit(id));
-//    }
-//
-//    @GetMapping("/by-user/{userName}")
-//    public ResponseEntity<List<PostResponse>> getPostsByUsername(@PathVariable String userName){
-//        return ResponseEntity.status(OK)
-//                .body(postService.getPostsByUsername(userName));
-//    }
+    @GetMapping("/by-product/{id}")
+    public ResponseEntity<List<PolicyResponse>> getAllPoliciesByProductId(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(policyService.getAllPoliciesByProductId(id));
+    }
 }

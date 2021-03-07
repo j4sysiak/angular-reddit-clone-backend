@@ -1,6 +1,7 @@
 package com.example.springredditclone.mapper;
 
 import com.example.springredditclone.dto.PolicyRequest;
+import com.example.springredditclone.dto.PolicyResponse;
 import com.example.springredditclone.model.Policy;
 import com.example.springredditclone.model.Post;
 import com.example.springredditclone.model.Product;
@@ -27,7 +28,7 @@ public abstract class PolicyMapper {
     /*do odczytu*/
     @Mapping(target = "productName", source = "product.name")
     @Mapping(target = "policyCreatedDate", expression = "java(getPolicyCreatedDateAsString(policy))")
-    public abstract PolicyRequest mapPolicyToDto(Policy policy);
+    public abstract PolicyResponse mapPolicyToDto(Policy policy);
 
     String getPolicyCreatedDateAsString(Policy policy) {
         Date myDate = Date.from(policy.getPolicyCreatedDate());
