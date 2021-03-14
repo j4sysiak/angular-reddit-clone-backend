@@ -2,6 +2,7 @@ package com.example.springredditclone.controller;
 
 import com.example.springredditclone.dto.PolicyRequest;
 import com.example.springredditclone.dto.PolicyResponse;
+import com.example.springredditclone.model.Policy;
 import com.example.springredditclone.service.PolicyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,13 @@ public class PolicyController {
     public ResponseEntity<Void> createPolicy(@RequestBody PolicyRequest policyRequest) {
         policyService.save(policyRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Policy> updatePolicy(@PathVariable Long id, @RequestBody PolicyRequest policyRequest) {
+        policyRequest.setPolicyId(id);
+        Policy updPolicy = policyService.save(policyRequest);
+        return new ResponseEntity<Policy>(updPolicy, HttpStatus.OK);
     }
 
     @GetMapping
