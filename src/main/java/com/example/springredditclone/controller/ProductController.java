@@ -33,9 +33,16 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProduct(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(productService.getProduct(id));
+                .body(productService.getProductById(id));
+    }
+
+    @GetMapping("/by-product-name/{name}")
+    public ResponseEntity<ProductDto> getProductByName(@PathVariable String name) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productService.getProductByName(name));
     }
 }

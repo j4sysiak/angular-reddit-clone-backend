@@ -41,9 +41,17 @@ public class ProductService {
                 .collect(toList());
     }
 
-    public ProductDto getProduct(Long id) {
+    @Transactional(readOnly = true)
+    public ProductDto getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new SpringRedditException("No product found with ID - " + id));
+        return productMapper.mapProductToDto(product);
+    }
+
+    @Transactional(readOnly = true)
+    public ProductDto getProductByName(String productName) {
+        Product product = productRepository.findByName(productName)
+                .orElseThrow(() -> new SpringRedditException("No product found with productName - " + productName));
         return productMapper.mapProductToDto(product);
     }
 }

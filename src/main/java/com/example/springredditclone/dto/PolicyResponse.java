@@ -15,5 +15,6 @@ public class PolicyResponse {
     private String policyDescription;
     private String policyCreatedDate;
 
+    private Long productId;
     private String productName;
 }

@@ -27,6 +27,7 @@ public abstract class PolicyMapper {
 
     /*do odczytu*/
     @Mapping(target = "productName", source = "product.name")
+    @Mapping(target = "productId", source = "product.id")
     @Mapping(target = "policyCreatedDate", expression = "java(getPolicyCreatedDateAsString(policy))")
     public abstract PolicyResponse mapPolicyToDto(Policy policy);
 
