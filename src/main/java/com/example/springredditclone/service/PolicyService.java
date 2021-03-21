@@ -2,6 +2,7 @@ package com.example.springredditclone.service;
 
 import com.example.springredditclone.dto.PolicyRequest;
 import com.example.springredditclone.dto.PolicyResponse;
+import com.example.springredditclone.exceptions.PolicyNotFoundException;
 import com.example.springredditclone.exceptions.PostNotFoundException;
 import com.example.springredditclone.exceptions.ProductNotFoundException;
 import com.example.springredditclone.mapper.PolicyMapper;
@@ -43,7 +44,7 @@ public class PolicyService {
     @Transactional(readOnly = true)
     public PolicyResponse getPolicy(Long id) {
         Policy policy = policyRepository.findById(id)
-                .orElseThrow(() -> new PostNotFoundException(id.toString()));
+                .orElseThrow(() -> new PolicyNotFoundException(id.toString()));
         return policyMapper.mapPolicyToDto(policy);
 
     }
@@ -69,5 +70,11 @@ public class PolicyService {
     public List<PolicyResponse> getAllPoliciesByNameContaining(String name) {
         List<Policy> policies = policyRepository.findByPolicyNameContaining(name);
         return policies.stream().map(policyMapper::mapPolicyToDto).collect(toList());
+    }
+
+    public void deletePolicyById(Long id) {
+        Policy policy = policyRepository.findById(id)
+                .orElseThrow(() -> new PolicyNotFoundException(id.toString()));
+        policyRepository.deleteById(id);
     }
 }

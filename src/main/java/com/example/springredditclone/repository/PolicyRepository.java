@@ -11,5 +11,6 @@ import java.util.List;
 public interface PolicyRepository extends JpaRepository<Policy, Long> {
 
     List<Policy> findAllByProduct(Product product);
+
     List<Policy> findByPolicyNameContaining(String name);
 }
