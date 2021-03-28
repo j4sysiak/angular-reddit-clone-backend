@@ -17,6 +17,7 @@ import java.util.Date;
 @Mapper(componentModel = "spring")
 public abstract class PolicyMapper {
 
+
     /*do tworzenia*/
     @InheritInverseConfiguration
     @Mapping(target = "policyName", source = "policyRequest.policyName")
