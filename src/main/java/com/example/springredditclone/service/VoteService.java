@@ -30,12 +30,13 @@ public class VoteService {
 
         Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
 
-        if (voteByPostAndUser.isPresent() &&
-                voteByPostAndUser.get().getVoteType()
-                        .equals(voteDto.getVoteType())) {
-            throw new SpringRedditException("You have already "
-                    + voteDto.getVoteType() + "'d for this post");
-        }
+        // na razie to zakomentuję, bo mam tylko user1 i będzie wywalało dla niego jęzeli już zrobił vota
+//        if (voteByPostAndUser.isPresent() &&
+//                voteByPostAndUser.get().getVoteType()
+//                        .equals(voteDto.getVoteType())) {
+//            throw new SpringRedditException("You have already "
+//                    + voteDto.getVoteType() + "'d for this post");
+//        }
         if (UPVOTE.equals(voteDto.getVoteType())) {
             post.setVoteCount(post.getVoteCount() + 1);
         } else {
