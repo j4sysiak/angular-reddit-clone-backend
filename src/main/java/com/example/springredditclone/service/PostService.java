@@ -43,9 +43,7 @@ public class PostService {
         Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName()).orElseThrow(() ->
                 new SubredditNotFoundException(postRequest.getSubredditName()));
 
-          User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
-          //User tmpUser = authService.getCurrentUser();
-
+        User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
         return postRepository.save(postMapper.mapDtoToPost(postRequest, subreddit, tmpUser /*authService.getCurrentUser()*/));
     }
 

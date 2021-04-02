@@ -27,9 +27,8 @@ public class SubredditService {
     @Transactional
     public SubredditDto save(SubredditDto subredditDto) {
         User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
-        //User tmpUser = authService.getCurrentUser();
 
-        Subreddit save = subredditRepository.save(subredditMapper.mapDtoToSubreddit(subredditDto, tmpUser));
+        Subreddit save = subredditRepository.save(subredditMapper.mapDtoToSubreddit(subredditDto, tmpUser /*authService.getCurrentUser()*/));
         subredditDto.setId(save.getId());
         subredditDto.setUser_id(save.getUser().getUserId());
         return subredditDto;
