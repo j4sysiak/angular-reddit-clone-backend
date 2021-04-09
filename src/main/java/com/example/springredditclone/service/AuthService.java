@@ -28,7 +28,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-//@Transactional
+@Transactional
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
@@ -91,7 +91,7 @@ public class AuthService {
 
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
-//                .refreshToken("")
+                .refreshToken("")
                 .refreshToken(refreshTokenService.generateRefreshToken().getToken())
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
                 .username(loginRequest.getUsername())
@@ -116,6 +116,7 @@ public class AuthService {
                 .username(refreshTokenRequest.getUsername())
                 .build();
     }
+
 
     public boolean isLoggedIn() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

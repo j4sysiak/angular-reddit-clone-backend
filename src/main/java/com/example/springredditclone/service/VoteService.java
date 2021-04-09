@@ -4,6 +4,7 @@ import com.example.springredditclone.dto.VoteDto;
 import com.example.springredditclone.exceptions.PostNotFoundException;
 import com.example.springredditclone.exceptions.SpringRedditException;
 import com.example.springredditclone.model.Post;
+import com.example.springredditclone.model.User;
 import com.example.springredditclone.model.Vote;
 import com.example.springredditclone.repository.PostRepository;
 import com.example.springredditclone.repository.VoteRepository;
@@ -28,28 +29,30 @@ public class VoteService {
         Post post = postRepository.findById(voteDto.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteDto.getPostId()));
 
-        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
+        User tmpUser = new User(1L,"user1", "user1", "user1@wp.pl");
+        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, tmpUser /*authService.getCurrentUser()*/);
 
-        if (voteByPostAndUser.isPresent() &&
-                voteByPostAndUser.get().getVoteType()
-                        .equals(voteDto.getVoteType())) {
-            throw new SpringRedditException("You have already "
-                    + voteDto.getVoteType() + "'d for this post");
-        }
+        // na razie to zakomentuję, bo mam tylko user1 i będzie wywalało dla niego jęzeli już zrobił vota
+//        if (voteByPostAndUser.isPresent() &&
+//                voteByPostAndUser.get().getVoteType()
+//                        .equals(voteDto.getVoteType())) {
+//            throw new SpringRedditException("You have already "
+//                    + voteDto.getVoteType() + "'d for this post");
+//        }
         if (UPVOTE.equals(voteDto.getVoteType())) {
             post.setVoteCount(post.getVoteCount() + 1);
         } else {
             post.setVoteCount(post.getVoteCount() - 1);
         }
-        voteRepository.save(mapToVote(voteDto, post));
+        voteRepository.save(mapToVote(voteDto, post, tmpUser));
         postRepository.save(post);
     }
 
-    private Vote mapToVote(VoteDto voteDto, Post post) {
+    private Vote mapToVote(VoteDto voteDto, Post post, User tmpUser) {
         return Vote.builder()
                 .voteType(voteDto.getVoteType())
                 .post(post)
-                .user(authService.getCurrentUser())
+                .user(tmpUser /*authService.getCurrentUser()*/)
                 .build();
     }
 }

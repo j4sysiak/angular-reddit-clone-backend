@@ -29,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and()
@@ -61,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/comments")
                 .permitAll()
-                .antMatchers(HttpMethod.POST, "/api/comments")
+                .antMatchers(HttpMethod.POST, "/api/comments/")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/posts/by-user/*")
                 .permitAll()
@@ -75,13 +74,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/api/subreddit")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/api/posts")
+                .antMatchers(HttpMethod.GET, "/api/posts/")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/api/posts")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/posts/**")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/api/posts/**")
+                .permitAll()
+                .antMatchers(HttpMethod.POST, "/api/votes/")
                 .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
