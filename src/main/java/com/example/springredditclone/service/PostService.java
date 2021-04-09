@@ -47,6 +47,7 @@ public class PostService {
         return postRepository.save(postMapper.mapDtoToPost(postRequest, subreddit, tmpUser /*authService.getCurrentUser()*/));
     }
 
+
     @Transactional(readOnly = true)
     public PostResponse getPost(Long id) {
         Post post = postRepository.findById(id)
