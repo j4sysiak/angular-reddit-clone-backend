@@ -22,6 +22,7 @@ public class BlogPostController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    
     @GetMapping("/all")
     public ResponseEntity<List<BlogPostDto>> showAllBlogPosts() {
         return new ResponseEntity<>(blogPostService.showAllBlogPosts(), HttpStatus.OK);
