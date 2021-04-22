@@ -1,6 +1,5 @@
 package com.example.springredditclone.config;
 
-
 import com.example.springredditclone.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
