@@ -20,7 +20,6 @@ import static com.example.springredditclone.model.VoteType.UPVOTE;
 @AllArgsConstructor
 public class VoteService {
 
-
     private final VoteRepository voteRepository;
     private final PostRepository postRepository;
     private final AuthService authService;
