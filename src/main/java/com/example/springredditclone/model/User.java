@@ -16,6 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "reddit_users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
