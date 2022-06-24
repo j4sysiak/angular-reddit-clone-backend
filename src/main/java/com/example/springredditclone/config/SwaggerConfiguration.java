@@ -24,6 +24,8 @@ public class SwaggerConfiguration {
                 .apiInfo(getApiInfo());
     }
 
+
+
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
                 .title("Reddit Clone API")
